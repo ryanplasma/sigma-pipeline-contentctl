@@ -1,0 +1,57 @@
+name: Output to contenctl yaml format
+priority: 100
+postprocessing:
+  - type: template
+    template: |+ 
+      name: {{rule.title}}
+      id: {{ rule.id }}
+      version: 1
+      date: {{rule.date}}
+      author: {{rule.author}}
+      data_sources:
+      - UPDATE
+      type: UPDATE
+      status: validation
+      description: {{rule.description}}
+      kind: UPDATE
+      search: '{{query}}'
+      how_to_implement: UPDATE_HOW_TO_IMPLEMENT
+      known_false_positives:
+      {% for fp in rule.falsepositives -%}
+        - {{fp}}
+      {% endfor -%}
+      references:
+      {% for reference in rule.references -%}
+        - {{reference}}
+      {% endfor -%}
+      tags:
+        analytic_story:
+        - UPDATE_STORY_NAME
+        asset_type: UPDATE asset_type
+        confidence: UPDATE value between 1-100
+        impact: UPDATE value between 1-100
+        message: UPDATE message
+        mitre_attack_id:
+        - UPDATE
+        observable:
+        - name: UPDATE
+          type: UPDATE
+          role:
+          - UPDATE
+        product:
+        - Splunk Enterprise
+        - Splunk Enterprise Security
+        - Splunk Cloud
+        required_fields:
+        - UPDATE
+        risk_score: UPDATE (impact * confidence)/100
+        security_domain: UPDATE
+        cve:
+        - UPDATE WITH CVE(S) IF APPLICABLE
+      tests:
+      - name: True Positive Test
+        attack_data:
+        - data: https://github.com/splunk/contentctl/wiki
+          sourcetype: UPDATE SOURCETYPE
+          source: UPDATE SOURCE
+      
