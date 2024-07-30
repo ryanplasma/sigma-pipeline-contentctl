@@ -16,10 +16,7 @@ postprocessing:
       kind: UPDATE
       search: '{{query}}'
       how_to_implement: UPDATE_HOW_TO_IMPLEMENT
-      known_false_positives:
-      {% for fp in rule.falsepositives -%}
-        - {{fp}}
-      {% endfor -%}
+      known_false_positives: '{% for fp in rule.falsepositives -%}{{fp}}{{ ", " if not loop.last else "" }}{% endfor %}'
       references:
       {% for reference in rule.references -%}
         - {{reference}}
